@@ -20,7 +20,7 @@ databaseChangeLog:
                     notNullConstraintName: nn_message_id
 
               - column:
-                  name: referenceId
+                  name: reference_id
                   type: VARCHAR(100)
                   constraints:
                     nullable: false
@@ -63,6 +63,10 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     notNullConstraintName: nn_message_strategy
+
+              - column:
+                  name: version
+                  type: BIGINT
 
               - column:
                   name: created_at

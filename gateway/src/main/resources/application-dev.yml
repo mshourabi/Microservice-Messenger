@@ -21,7 +21,7 @@ spring:
       routes:
 
         - id: distributor-service
-          uri: localhost:8070
+          uri: localhost:8071
           predicates:
             - Path=/api/users/**
 

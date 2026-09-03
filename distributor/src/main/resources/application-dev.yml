@@ -12,11 +12,11 @@ spring:
 
   liquibase:
     enabled: true
-    change-log: classpath:db/changelog/db.changelog-master.yaml
+    change-log: classpath:db/changelog/db.changelog-master.yml
 
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
-    hibernate.ddl-auto: none
+    hibernate.ddl-auto: validate
     show-sql: true
     properties.hibernate.format_sql: true
   h2:
@@ -35,3 +35,10 @@ springdoc:
     operationsSorter: method
     path: /swagger-ui-custom.html
     enabled: true
+
+logging:
+  level:
+    org.springframework.orm.jpa: DEBUG
+    org.hibernate.tool.schema: DEBUG
+    liquibase: DEBUG
+    org.springframework.boot.autoconfigure.liquibase: DEBUG

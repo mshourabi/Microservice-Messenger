@@ -36,6 +36,17 @@ databaseChangeLog:
                     notNullConstraintName: nn_sender_active
 
               - column:
+                  name: platform
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_sender_platform
+
+              - column:
+                  name: version
+                  type: BIGINT
+
+              - column:
                   name: created_at
                   type: TIMESTAMP
                   constraints:

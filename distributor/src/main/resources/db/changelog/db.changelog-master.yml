@@ -1,0 +1,13 @@
+databaseChangeLog:
+
+  - include:
+      file: changes/message/001-create-message.yml
+      relativeToChangelogFile: true
+
+  - include:
+      file: changes/sender/001-create-sender.yml
+      relativeToChangelogFile: true
+
+  - include:
+      file: changes/message_sender/001-create-message-sender.yml
+      relativeToChangelogFile: true

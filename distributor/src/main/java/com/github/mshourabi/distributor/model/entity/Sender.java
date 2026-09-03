@@ -2,10 +2,7 @@ package com.github.mshourabi.distributor.model.entity;
 
 import com.github.mshourabi.client.entity.BaseEntity;
 import com.github.mshourabi.client.enums.Platform;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Set;
 
@@ -13,9 +10,14 @@ import java.util.Set;
 @Entity
 public class Sender extends BaseEntity {
 
-    @Column(unique = true)
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
+
+    @Column(name = "active", nullable = false)
     private boolean active;
+
+    @Column(name = "platform", nullable = false)
+    @Enumerated(EnumType.STRING)
     private Platform platform;
 
     @ManyToMany(mappedBy = "senders")

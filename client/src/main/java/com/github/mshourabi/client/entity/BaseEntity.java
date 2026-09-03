@@ -20,11 +20,11 @@ public abstract class BaseEntity {
     private Long version;
 
     @CreatedDate
-    @Column(nullable = false, updatable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 
     @LastModifiedDate
-    @Column(nullable = false)
+    @Column(name = "last_modified_at", nullable = false)
     private Instant lastModifiedAt;
 
     public Long getId() {

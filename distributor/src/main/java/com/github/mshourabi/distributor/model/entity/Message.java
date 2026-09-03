@@ -11,28 +11,28 @@ import java.util.List;
 @Entity
 public class Message extends BaseEntity {
 
-    @Column(unique = true, nullable = false)
+    @Column(name = "reference_id", unique = true, nullable = false)
     private String referenceId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1000)
     private String content;
 
-    @Column(nullable = false)
+    @Column(name="creator_username", nullable = false)
     private String creatorUsername;
 
-    @Column(nullable = false)
+    @Column(name = "receiver_identifier", nullable = false)
     private String receiverIdentifier;
 
-    @Column(nullable = false)
+    @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
     private MessageStatus status;
 
-    @Column(nullable = false)
+    @Column(name="sending_strategy", nullable = false)
     @Enumerated(EnumType.STRING)
     private SendingStrategy sendingStrategy;
 
     @ManyToMany
-    @OrderColumn(name = "order")
+    @OrderColumn(name = "sender_order")
     @JoinTable(
             name = "tbl_message_sender",
             joinColumns = @JoinColumn(name = "message_id"),
