@@ -1,0 +1,51 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 001-create-message-sender
+      author: majid
+
+      changes:
+
+        - createTable:
+            tableName: tbl_message_sender
+            columns:
+
+              - column:
+                  name: message_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_messagesender_messageid
+
+              - column:
+                  name: sender_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_messagesender_senderid
+
+              - column:
+                  name: order
+                  type: INT
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_messagesender_order
+
+        - addPrimaryKey:
+            tableName: message_sender
+            columnNames: message_id, sender_id
+            constraintName: pk_message_sender
+
+        - addForeignKeyConstraint:
+            baseTableName: message_sender
+            baseColumnNames: message_id
+            referencedTableName: message
+            referencedColumnNames: id
+            constraintName: fk_messagesender_messageid
+
+        - addForeignKeyConstraint:
+            baseTableName: message_sender
+            baseColumnNames: sender_id
+            referencedTableName: sender
+            referencedColumnNames: id
+            constraintName: fk_messagesender_senderid

@@ -1,0 +1,79 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 001-create-message
+      author: majid
+      changes:
+
+        - createTable:
+            tableName: tbl_message
+            columns:
+
+              - column:
+                  name: ID
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_message_id
+                    nullable: false
+                    notNullConstraintName: nn_message_id
+
+              - column:
+                  name: referenceId
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_message_reference
+                    unique: true
+                    uniqueConstraintName: uk_message_reference
+
+              - column:
+                  name: content
+                  type: NVARCHAR(1000)
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_message_content
+
+              - column:
+                  name: creator_username
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_message_username
+
+
+              - column:
+                  name: receiver_identifier
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_message_receiver
+
+              - column:
+                  name: status
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_message_status
+
+              - column:
+                  name: sending_strategy
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_message_strategy
+
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_message_created
+
+              - column:
+                  name: last_modified_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_sender_lastmodify
