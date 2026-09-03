@@ -1,0 +1,155 @@
+```gitignore
+# =========================================================
+# Maven
+# =========================================================
+
+# Maven build output - all modules
+target/
+**/target/
+
+# Maven wrapper generated files
+# Keep mvnw, mvnw.cmd and .mvn/wrapper in Git
+# Do NOT ignore .mvn/
+
+# Maven generated files
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+release.properties
+dependency-reduced-pom.xml
+.flattened-pom.xml
+
+
+# =========================================================
+# IntelliJ IDEA
+# =========================================================
+
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+
+# =========================================================
+# Java
+# =========================================================
+
+*.class
+
+# JVM crash logs
+hs_err_pid*
+replay_pid*
+
+
+# =========================================================
+# Logs
+# =========================================================
+
+*.log
+logs/
+log/
+
+
+# =========================================================
+# Spring Boot / Local Configuration
+# =========================================================
+
+# Local-only Spring configuration
+application-local.yml
+application-local.yaml
+application-local.properties
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+
+# =========================================================
+# Secrets / Credentials
+# =========================================================
+
+*.key
+*.pem
+*.p12
+*.jks
+*.keystore
+
+secrets/
+
+
+# =========================================================
+# Docker
+# =========================================================
+
+# Local Docker data
+.docker/
+
+# Local docker-compose overrides
+docker-compose.override.yml
+
+
+# =========================================================
+# Kubernetes
+# =========================================================
+
+# Local Kubernetes configuration
+.kube/
+
+# Local Kubernetes files
+*.local.yml
+*.local.yaml
+
+
+# =========================================================
+# IDE / Editor
+# =========================================================
+
+.vscode/
+
+# Vim
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.temp
+
+
+# =========================================================
+# Operating System
+# =========================================================
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# Linux
+*~
+
+
+# =========================================================
+# Test / Coverage
+# =========================================================
+
+*.exec
+coverage/
+jacoco/
+
+
+# =========================================================
+# Database local files
+# =========================================================
+
+*.db
+*.sqlite
+*.sqlite3
+
+# H2
+*.mv.db
+*.trace.db
