@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: client
+
+
+subsystem:
+  telegram-sender:
+    name: telegram-sender
