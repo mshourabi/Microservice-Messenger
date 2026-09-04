@@ -5,3 +5,7 @@ spring:
   application:
     name: telegram-sender
 
+  liquibase:
+    enabled: false
+#    change-log: classpath:db/changelog/db.changelog-master.yml
+
