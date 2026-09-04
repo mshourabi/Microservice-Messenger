@@ -43,6 +43,7 @@ public class SenderDTO {
             @Schema(name = "name", requiredMode = Schema.RequiredMode.REQUIRED)
             @NotBlank
             String name,
+
             @Schema(name = "active", requiredMode = Schema.RequiredMode.AUTO, defaultValue = "false")
             boolean active) {
 

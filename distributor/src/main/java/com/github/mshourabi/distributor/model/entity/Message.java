@@ -108,11 +108,11 @@ public class Message extends BaseEntity {
         this.status = status;
     }
 
-    public SendingStrategy getSendingType() {
+    public SendingStrategy getSendingStrategy() {
         return sendingStrategy;
     }
 
-    public void setSendingType(SendingStrategy sendingStrategy) {
+    public void setSendingStrategy(SendingStrategy sendingStrategy) {
         this.sendingStrategy = sendingStrategy;
     }
 }

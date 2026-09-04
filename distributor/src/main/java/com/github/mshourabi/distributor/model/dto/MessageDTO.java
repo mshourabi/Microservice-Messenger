@@ -40,7 +40,7 @@ public class MessageDTO {
                     message.getContent(),
                     message.getReceiverIdentifier(),
                     message.getStatus(),
-                    message.getSendingType(),
+                    message.getSendingStrategy(),
                     message.getCreatedAt(),
                     message.getLastModifiedAt());
         }
