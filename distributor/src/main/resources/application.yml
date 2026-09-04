@@ -4,3 +4,8 @@ server:
 spring:
   application:
     name: Distributor
+
+
+telegram-sender:
+  service:
+    name: telegram-sender

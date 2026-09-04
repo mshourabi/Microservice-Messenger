@@ -42,3 +42,7 @@ logging:
     org.hibernate.tool.schema: DEBUG
     liquibase: DEBUG
     org.springframework.boot.autoconfigure.liquibase: DEBUG
+
+telegram-sender:
+  service:
+    url: http://localhost:8072

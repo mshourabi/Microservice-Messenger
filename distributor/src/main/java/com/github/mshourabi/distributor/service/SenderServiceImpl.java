@@ -54,10 +54,11 @@ public class SenderServiceImpl implements SenderService {
     public Long create(SenderDTO.CreateRequest createRequest){
         Sender sender = SenderDTO.CreateRequest.map(createRequest);
         Optional<Sender> optional = repository.findByName(sender.getName());
+
         if (optional.isPresent()) {
-            sender.setPlatform(Platform.SMS);
-            return repository.save(sender).getId();
+            throw new DuplicateException(sender.getName(), "Sender with name '" + sender.getName() + "' already exists");
         }
-        throw new DuplicateException(sender.getName(), "Sender with name '" + sender.getName() + "' already exists");
+        sender.setPlatform(Platform.SMS);
+        return repository.save(sender).getId();
     }
 }

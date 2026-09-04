@@ -35,3 +35,8 @@ springdoc:
     operationsSorter: method
     path: /swagger-ui-custom.html
     enabled: true
+
+
+telegram-sender:
+  service:
+    url: http://telegram-sender:8072

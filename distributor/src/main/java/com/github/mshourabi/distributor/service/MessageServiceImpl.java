@@ -1,6 +1,7 @@
 package com.github.mshourabi.distributor.service;
 
 import com.github.mshourabi.client.enums.MessageStatus;
+import com.github.mshourabi.client.enums.Platform;
 import com.github.mshourabi.client.enums.SendingStrategy;
 import com.github.mshourabi.client.exceptions.ResourceNotFoundException;
 import com.github.mshourabi.distributor.model.dto.MessageDTO;
@@ -59,14 +60,16 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public MessageDTO.Info send(MessageDTO.CreateRequest createRequest) {
         List<Sender> senders = new ArrayList<>();
-        for (Long senderProviderId : createRequest.senderIds()) {
-            senders.add(senderService.findSenderById(senderProviderId));
-        }
+
+//        for (Long senderProviderId : createRequest.senderIds()) {
+//            senders.add(senderService.findSenderById(senderProviderId));
+//        }
+
         Message message = MessageDTO.CreateRequest.map(createRequest);
         message.setSenders(senders);
         message.setReferenceId(UUID.randomUUID().toString());
 
-        if (message.getSendingStrategy().equals(SendingStrategy.SYNC)) {
+        if (message.getSendingStrategy().equals(SendingStrategy.ASYNC)) {
             message.setStatus(MessageStatus.PENDING);
             queueService.sending(message);
         } else  {

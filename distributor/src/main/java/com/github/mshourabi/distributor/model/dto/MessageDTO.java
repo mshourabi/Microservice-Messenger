@@ -51,7 +51,6 @@ public class MessageDTO {
      *
      * @param content
      * @param receiverIdentifier
-     * @param senderIds
      */
     @Schema(name = "MessageCreatedRequest")
     public record CreateRequest(
@@ -65,12 +64,13 @@ public class MessageDTO {
             String receiverIdentifier,
 
             @Schema(name = "sendingStrategy", defaultValue = "IN_QUEUE", description = "Send Message Strategy.")
-            SendingStrategy sendingStrategy,
+            SendingStrategy sendingStrategy
 
-            @Schema(name = "senderId", requiredMode = Schema.RequiredMode.REQUIRED, description = "A list of senders, the first one has most priority.")
-            @NotEmpty
-            List<Long> senderIds
-            ){
+//
+//            @Schema(name = "senderId", requiredMode = Schema.RequiredMode.REQUIRED, description = "A list of senders, the first one has most priority.")
+//            @NotEmpty
+//            List<Long> senderIds
+           ){
 
 
         public CreateRequest {
@@ -84,7 +84,7 @@ public class MessageDTO {
          * @return
          */
         public static Message map(CreateRequest createRequest){
-            return new Message(createRequest.content, createRequest.receiverIdentifier);
+            return new Message(createRequest.content, createRequest.receiverIdentifier, createRequest.sendingStrategy);
         }
 
     }

@@ -44,9 +44,10 @@ public class Message extends BaseEntity {
     public Message() {
     }
 
-    public Message(String content, String receiverIdentifier) {
+    public Message(String content, String receiverIdentifier, SendingStrategy sendingStrategy) {
         this.content = content;
         this.receiverIdentifier = receiverIdentifier;
+        this.sendingStrategy = sendingStrategy;
     }
 
     public Message(String referenceId, String content, String creatorUsername, String receiverIdentifier,
