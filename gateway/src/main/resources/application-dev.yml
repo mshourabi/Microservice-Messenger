@@ -18,10 +18,15 @@ management:
 spring:
   cloud:
     gateway:
-      routes:
+      server:
+        webflux:
 
-        - id: distributor-service
-          uri: localhost:8071
-          predicates:
-            - Path=/api/users/**
+          routes:
+            - id: distributor-service
+              uri: http://localhost:8071
+              predicates:
+                - Path=/api/v1/messages/**
 
+services:
+  distributor:
+    url: http://localhost:8071

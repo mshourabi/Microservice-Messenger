@@ -15,15 +15,18 @@ management:
         include: "*"
 #        exclude: "*"
 
-
-
 spring:
   cloud:
     gateway:
-      routes:
+      server:
+        webflux:
 
-        - id: distributor-service
-          uri: http://distributor-service:8080
-          predicates:
-            - Path=/api/users/**
+          routes:
+            - id: distributor-service
+              uri: http://distributor-service:8080
+              predicates:
+                - Path=/api/v1/messages/**
 
+services:
+  distributor:
+    url: http://distributor:8071

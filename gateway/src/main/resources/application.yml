@@ -1,6 +1,29 @@
+application:
+  title: Messenger Gate Way
+  version: 0.0.1-snapshot
+
 server:
   port: 8070
 
+management:
+  endpoint:
+    gateway:
+      access: read_only
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+#        exclude: "*"
+
 spring:
-  application:
-    name: gateway
+  cloud:
+    gateway:
+      server:
+        webflux:
+
+          routes:
+            - id: distributor-service
+              uri: ${services.distributor.url}
+              predicates:
+                - Path=/api/v1/messages/**
+

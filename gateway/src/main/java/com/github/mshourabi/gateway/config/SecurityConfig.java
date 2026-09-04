@@ -15,25 +15,12 @@ public class SecurityConfig {
 
         return http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
-//                .authorizeExchange(exchange -> exchange
-//
-//                        .pathMatchers(
-//                                "/api/auth/**",
-//                                "/actuator/health"
-//                        ).permitAll()
-//
-//                        .pathMatchers("/api/orders/**")
-//                        .authenticated()
-//
-//                        .pathMatchers("/api/admin/**")
-//                        .hasRole("ADMIN")
-//
-//                        .anyExchange()
-//                        .authenticated()
-//                )
-//                .oauth2ResourceServer(
-//                        oauth2 -> oauth2.jwt()
-//                )
+                .authorizeExchange(exchange -> exchange
+                        .pathMatchers("/api/v1/messages/**").permitAll()
+                        .pathMatchers("/actuator/**").permitAll()
+                        .anyExchange()
+                        .authenticated()
+                )
                 .build();
     }
 }
