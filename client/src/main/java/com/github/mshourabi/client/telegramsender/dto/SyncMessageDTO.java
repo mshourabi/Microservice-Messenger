@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotEmpty;
 
 import java.util.List;
 
-public class MessageDTO {
+public class SyncMessageDTO {
 
     /**
      *
@@ -23,11 +23,7 @@ public class MessageDTO {
 
             @Schema(name = "receiverIdentifier", requiredMode = Schema.RequiredMode.REQUIRED, description = "Receiver's Identifier depend on platform.")
             @NotBlank
-            String receiverIdentifier,
-
-            @Schema(name = "senderId", requiredMode = Schema.RequiredMode.REQUIRED, description = "A list of senders, the first one has most priority.")
-            @NotEmpty
-            List<Long> senderIds
+            String receiverIdentifier
     ) {
     }
 

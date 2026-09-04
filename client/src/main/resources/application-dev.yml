@@ -1,8 +1,8 @@
-spring:
-  application:
-    name: client
-
-
-subsystem:
-  telegram-sender:
-    name: localhost:8072
+##spring:
+##  application:
+##    name: client
+##
+##
+#telegram-sender:
+#  service:
+#    name: localhost:8072
