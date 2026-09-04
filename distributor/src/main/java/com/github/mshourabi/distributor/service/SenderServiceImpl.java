@@ -1,5 +1,6 @@
 package com.github.mshourabi.distributor.service;
 
+import com.github.mshourabi.client.enums.Platform;
 import com.github.mshourabi.client.exceptions.DuplicateException;
 import com.github.mshourabi.client.exceptions.ResourceNotFoundException;
 import com.github.mshourabi.distributor.model.dto.SenderDTO;
@@ -54,6 +55,7 @@ public class SenderServiceImpl implements SenderService {
         Sender sender = SenderDTO.CreateRequest.map(createRequest);
         Optional<Sender> optional = repository.findByName(sender.getName());
         if (optional.isPresent()) {
+            sender.setPlatform(Platform.SMS);
             return repository.save(sender).getId();
         }
         throw new DuplicateException(sender.getName(), "Sender with name '" + sender.getName() + "' already exists");

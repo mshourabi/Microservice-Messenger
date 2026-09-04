@@ -1,5 +1,7 @@
 package com.github.mshourabi.distributor.service;
 
+import com.github.mshourabi.client.enums.MessageStatus;
+import com.github.mshourabi.client.enums.SendingStrategy;
 import com.github.mshourabi.client.exceptions.ResourceNotFoundException;
 import com.github.mshourabi.distributor.model.dto.MessageDTO;
 import com.github.mshourabi.distributor.model.entity.Message;
@@ -20,11 +22,16 @@ public class MessageServiceImpl implements MessageService {
 
     private static final Logger log = LoggerFactory.getLogger(MessageServiceImpl.class);
     private final SenderService senderService;
+    private final SendingThroughQueueService queueService;
+    private final SendingDirectService sendingDirectService;
     private final MessageRepository repository;
 
-    public MessageServiceImpl(MessageRepository repository, SenderService senderService) {
+    public MessageServiceImpl(MessageRepository repository, SenderService senderService,
+                              SendingThroughQueueService queueService, SendingDirectService sendingDirectService) {
         this.repository = repository;
         this.senderService = senderService;
+        this.queueService = queueService;
+        this.sendingDirectService = sendingDirectService;
     }
 
     @Override
@@ -50,19 +57,23 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    @Transactional(rollbackFor = Throwable.class)
-    public Long send(MessageDTO.CreateRequest createRequest) {
+    public MessageDTO.Info send(MessageDTO.CreateRequest createRequest) {
         List<Sender> senders = new ArrayList<>();
         for (Long senderProviderId : createRequest.senderIds()) {
             senders.add(senderService.findSenderById(senderProviderId));
         }
-
         Message message = MessageDTO.CreateRequest.map(createRequest);
         message.setSenders(senders);
         message.setReferenceId(UUID.randomUUID().toString());
 
-        return repository.save(message).getId();
+        if (message.getSendingStrategy().equals(SendingStrategy.SYNC)) {
+            message.setStatus(MessageStatus.PENDING);
+            queueService.sending(message);
+        } else  {
+            message.setStatus(MessageStatus.SENDING);
+            sendingDirectService.sending(message);
+        }
+        return MessageDTO.Info.map(message);
     }
-
 
 }

@@ -13,5 +13,5 @@ public interface MessageService {
 
     Message findMessageByReferenceId(String referenceId);
 
-    Long send(MessageDTO.CreateRequest createRequest);
+    MessageDTO.Info send(MessageDTO.CreateRequest createRequest);
 }
