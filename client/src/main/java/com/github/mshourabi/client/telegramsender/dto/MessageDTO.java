@@ -15,7 +15,7 @@ public class MessageDTO {
      * @param senderIds
      */
     @Schema(name = "MessageSendRequest")
-    public record SendRequest(
+    public record SendDirectRequest(
 
             @Schema(name = "content", requiredMode = Schema.RequiredMode.REQUIRED, description = "Message's contents.")
             @NotBlank
@@ -32,7 +32,6 @@ public class MessageDTO {
     }
 
 
-    public record SendResponse(String Status
-    ) {
+    public record SendDirectResponse(String Status) {
     }
 }

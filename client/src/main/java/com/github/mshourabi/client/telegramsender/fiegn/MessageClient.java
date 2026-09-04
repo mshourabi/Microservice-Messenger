@@ -11,5 +11,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface MessageClient {
 
     @PostMapping(ApiConstants.MESSAGES)
-    ResponseEntity<MessageDTO.SendResponse> createMessage(@RequestBody MessageDTO.SendRequest sendRequest);
+    ResponseEntity<MessageDTO.SendDirectResponse> createMessage(@RequestBody MessageDTO.SendDirectRequest sendDirectRequest);
 }

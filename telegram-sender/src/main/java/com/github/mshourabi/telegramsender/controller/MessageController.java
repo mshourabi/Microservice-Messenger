@@ -26,8 +26,8 @@ public class MessageController {
 
     @Operation(operationId = "Send a Message")
     @PostMapping()
-    public ResponseEntity<MessageDTO.SendResponse> createMessage(@Validated @RequestBody MessageDTO.SendRequest sendRequest) {
-        MessageDTO.SendResponse sendResponse = service.sendMessage(sendRequest);
+    public ResponseEntity<MessageDTO.SendDirectResponse> createMessage(@Validated @RequestBody MessageDTO.SendDirectRequest sendDirectRequest) {
+        MessageDTO.SendDirectResponse sendResponse = service.sendMessage(sendDirectRequest);
         return ResponseEntity.ok().body(sendResponse);
     }
 }

@@ -7,6 +7,6 @@ import org.springframework.stereotype.Service;
 public interface MessageService {
 
 
-    MessageDTO.SendResponse sendMessage(MessageDTO.SendRequest sendRequest);
+    MessageDTO.SendDirectResponse sendMessage(MessageDTO.SendDirectRequest sendDirectRequest);
 
 }

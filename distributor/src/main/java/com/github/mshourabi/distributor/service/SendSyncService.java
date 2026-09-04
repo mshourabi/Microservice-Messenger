@@ -4,7 +4,7 @@ import com.github.mshourabi.distributor.model.entity.Message;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SendingDirectService implements SendingService {
+public class SendSyncService implements SendingService {
 
 
     @Override

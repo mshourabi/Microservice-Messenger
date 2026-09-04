@@ -22,16 +22,16 @@ public class MessageServiceImpl implements MessageService {
 
     private static final Logger log = LoggerFactory.getLogger(MessageServiceImpl.class);
     private final SenderService senderService;
-    private final SendingThroughQueueService queueService;
-    private final SendingDirectService sendingDirectService;
+    private final SendAsyncService queueService;
+    private final SendSyncService sendSyncService;
     private final MessageRepository repository;
 
     public MessageServiceImpl(MessageRepository repository, SenderService senderService,
-                              SendingThroughQueueService queueService, SendingDirectService sendingDirectService) {
+                              SendAsyncService queueService, SendSyncService sendSyncService) {
         this.repository = repository;
         this.senderService = senderService;
         this.queueService = queueService;
-        this.sendingDirectService = sendingDirectService;
+        this.sendSyncService = sendSyncService;
     }
 
     @Override
@@ -71,7 +71,7 @@ public class MessageServiceImpl implements MessageService {
             queueService.sending(message);
         } else  {
             message.setStatus(MessageStatus.SENDING);
-            sendingDirectService.sending(message);
+            sendSyncService.sending(message);
         }
         return MessageDTO.Info.map(message);
     }

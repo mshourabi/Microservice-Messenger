@@ -6,11 +6,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class SendingThroughQueueService implements SendingService {
+public class SendAsyncService implements SendingService {
 
     private final MessageRepository messageRepository;
 
-    public SendingThroughQueueService(MessageRepository messageRepository) {
+    public SendAsyncService(MessageRepository messageRepository) {
         this.messageRepository = messageRepository;
     }
 

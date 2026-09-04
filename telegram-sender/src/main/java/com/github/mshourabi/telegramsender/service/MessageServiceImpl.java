@@ -15,7 +15,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public MessageDTO.SendResponse sendMessage(MessageDTO.SendRequest sendRequest) {
+    public MessageDTO.SendDirectResponse sendMessage(MessageDTO.SendDirectRequest sendDirectRequest) {
         log.trace("sendMessage");
         return null;
     }
