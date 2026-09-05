@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(
         name = "${telegram-sender.service.name}",
-        url = "${telegram-sender.service.url}"
+        url = "${telegram-sender.service.url}",
+        fallback = TelegramSenderClientFallback.class
 )
 public interface TelegramSenderClient {
 

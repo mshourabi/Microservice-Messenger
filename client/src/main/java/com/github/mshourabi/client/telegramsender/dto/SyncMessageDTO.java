@@ -12,7 +12,6 @@ public class SyncMessageDTO {
      *
      * @param content
      * @param receiverIdentifier
-     * @param senderIds
      */
     @Schema(name = "MessageSendRequest")
     public record SendDirectRequest(

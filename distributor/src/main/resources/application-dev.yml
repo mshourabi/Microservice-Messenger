@@ -24,6 +24,30 @@ spring:
       enabled: true
       path: /h2-console
 
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      telegramSender:    #  ${telegram-sender.service.name}
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 50
+        minimumNumberOfCalls: 5
+        failureRateThreshold: 50  # 50%
+        waitDurationInOpenState: 5s
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+
+      default:
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 5
+        minimumNumberOfCalls: 5
+        failureRateThreshold: 50  # 50%
+        waitDurationInOpenState: 5s
+        permittedNumberOfCallsInHalfOpenState: 3
 
 application:
   title: Messenger Distributor
@@ -45,4 +69,5 @@ logging:
 
 telegram-sender:
   service:
+    name: telegramSender
     url: http://localhost:8072
