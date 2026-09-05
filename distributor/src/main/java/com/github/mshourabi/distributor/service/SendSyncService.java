@@ -33,7 +33,7 @@ public class SendSyncService implements SendingService {
 
     private void sendViaTelegram(Message message) {
         SyncMessageDTO.SendDirectRequest sendDirectRequest =
-                new SyncMessageDTO.SendDirectRequest(message.getContent(), message.getReceiverIdentifier());
+                new SyncMessageDTO.SendDirectRequest(message.getContent(), message.getReceiverIdentifier(), message.getReferenceId());
         ResponseEntity<SyncMessageDTO.SendDirectResponse> syncMessageResponse = telegramSenderClient.sendMessage(sendDirectRequest);
 
         if (syncMessageResponse.getStatusCode().is5xxServerError()) {

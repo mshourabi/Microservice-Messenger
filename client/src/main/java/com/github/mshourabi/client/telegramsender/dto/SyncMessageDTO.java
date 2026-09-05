@@ -1,12 +1,38 @@
 package com.github.mshourabi.client.telegramsender.dto;
 
+import com.github.mshourabi.client.enums.MessageStatus;
+import com.github.mshourabi.client.enums.SendingStrategy;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 
-import java.util.List;
+import java.time.Instant;
 
 public class SyncMessageDTO {
+
+
+    /**
+     *
+     * @param id
+     * @param referenceId
+     * @param content
+     * @param receiverIdentifier
+     * @param status
+     * @param createdAt
+     * @param lastModifiedAt
+     */
+    @Schema(name = "MessageInfo")
+    public record Info(
+            Long id,
+            String referenceId,
+            String content,
+            String receiverIdentifier,
+            MessageStatus status,
+            SendingStrategy sendingStrategy,
+            Instant createdAt,
+            Instant lastModifiedAt) {
+
+    }
+
 
     /**
      *
@@ -22,11 +48,15 @@ public class SyncMessageDTO {
 
             @Schema(name = "receiverIdentifier", requiredMode = Schema.RequiredMode.REQUIRED, description = "Receiver's Identifier depend on platform.")
             @NotBlank
-            String receiverIdentifier
+            String receiverIdentifier,
+
+            @Schema(name = "referenceId", requiredMode = Schema.RequiredMode.REQUIRED, description = "Reference Id")
+            @NotBlank
+            String referenceId
     ) {
     }
 
 
-    public record SendDirectResponse(String Status) {
+    public record SendDirectResponse(String id, String Status, String Content, String receiverIdentifier, String referenceId) {
     }
 }

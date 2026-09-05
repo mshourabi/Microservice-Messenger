@@ -9,3 +9,26 @@ spring:
     enabled: false
 #    change-log: classpath:db/changelog/db.changelog-master.yml
 
+  cloud:
+    openfeign:
+      retry:
+        enabled: true
+
+resilience4j:
+  retry:
+    instances:
+      getMessageFromTelegramSender:
+        maxAttempts: 3
+        waitDuration: 500ms
+        retryExceptions:
+          - java.io.IOException
+          - java.util.concurrent.TimeoutException
+        failAfterMaxAttempts: true
+
+      default:
+        maxAttempts: 3
+        waitDuration: 500ms
+        retryExceptions:
+          - java.io.IOException
+          - java.util.concurrent.TimeoutException
+        failAfterMaxAttempts: true
