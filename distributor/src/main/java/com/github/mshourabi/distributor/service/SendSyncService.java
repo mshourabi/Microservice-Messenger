@@ -1,7 +1,7 @@
 package com.github.mshourabi.distributor.service;
 
 import com.github.mshourabi.client.enums.Platform;
-import com.github.mshourabi.client.exceptions.DuplicateException;
+import com.github.mshourabi.client.exceptions.DomainException;
 import com.github.mshourabi.client.telegramsender.dto.SyncMessageDTO;
 import com.github.mshourabi.client.telegramsender.fiegn.TelegramSenderClient;
 import com.github.mshourabi.distributor.model.entity.Message;
@@ -37,11 +37,10 @@ public class SendSyncService implements SendingService {
         ResponseEntity<SyncMessageDTO.SendDirectResponse> syncMessageResponse = telegramSenderClient.sendMessage(sendDirectRequest);
 
         if (syncMessageResponse.getStatusCode().is5xxServerError()) {
-            log.error("Send Sync Message to telegram");
-            throw new DuplicateException("An Error Occurred please try later");
+            log.error("Can not Send Sync Message to telegram.");
+            throw new DomainException("An Error Occurred please try later.");
         } else {
-            log.info("Send Sync Message to telegram");
-            System.out.println("Send Sync Message to telegram");
+            log.info("Send Sync Message to telegram.");
         }
     }
 }
