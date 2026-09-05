@@ -32,3 +32,11 @@ resilience4j:
           - java.io.IOException
           - java.util.concurrent.TimeoutException
         failAfterMaxAttempts: true
+
+
+  ratelimiter:
+    instances:
+      getMessageFromTelegramSender:
+        limitForPeriod: 10
+        limitRefreshPeriod: 2s
+        timeoutDuration: 0s

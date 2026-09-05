@@ -6,10 +6,12 @@ import com.github.mshourabi.client.enums.SendingStrategy;
 import com.github.mshourabi.client.telegramsender.constants.ApiConstants;
 import com.github.mshourabi.client.telegramsender.dto.SyncMessageDTO;
 import com.github.mshourabi.telegramsender.service.MessageService;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.github.resilience4j.retry.annotation.Retry;
 import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -38,8 +40,11 @@ public class MessageController {
 
     @Operation(operationId = "Get Message")
     @GetMapping("/{referenceId}")
-    @Retry(name = "getMessageFromTelegramSender", fallbackMethod = "getMessageFallBackMethod")
+    @Retry(name = "getMessageFromTelegramSender", fallbackMethod = "getMessageFallBackMethodRetry")
+    @RateLimiter(name = "getMessageFromTelegramSender", fallbackMethod = "getMessageFallBackMethodRateLimiter")
     public ResponseEntity<SyncMessageDTO.Info> getMessage(@PathVariable String referenceId) {
+
+        log.info("The getMessage method Call successfully");
 
         SyncMessageDTO.Info info = new SyncMessageDTO.Info(
                 1L, referenceId, "A test message", "receiverIdentifier",
@@ -48,16 +53,31 @@ public class MessageController {
     }
 
     /**
-     * FallBack Method
+     * FallBack Method for Retry
      *
      * @param referenceId
      * @param ex
      * @return
      */
-    public ResponseEntity<SyncMessageDTO.Info> getMessageFallBackMethod(@PathVariable String referenceId, Throwable ex) {
-        log.error("Can not call getMessageFromTelegramSender.", ex);
-        return ResponseEntity.ok().body(null);
+    public ResponseEntity<SyncMessageDTO.Info> getMessageFallBackMethodRetry(
+            @PathVariable String referenceId, Throwable ex) {
+
+        log.error("Can not getMessageFromTelegramSender.", ex);
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(null);
     }
 
 
+    /**
+     * FallBack Method for RateLimiter
+     *
+     * @param referenceId
+     * @param ex
+     * @return
+     */
+    public ResponseEntity<SyncMessageDTO.Info> getMessageFallBackMethodRateLimiter(
+            @PathVariable String referenceId, Throwable ex) {
+
+        log.error("To Many Request.", ex);
+        return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body(null);
+    }
 }
