@@ -27,6 +27,19 @@ spring:
               predicates:
                 - Path=/api/v1/messages/**
               filters:
+                - name: Retry
+                  args:
+                    retries: 3
+                    methods: GET    # Just on idempotent methods
+                    series: SERVER_ERROR
+                    exceptions:
+                      - java.io.IOException
+                      - java.util.concurrent.TimeoutException
+                    backoff:
+                      firstBackoff: 100ms
+                      maxBackoff: 1s
+                      factor: 2
+                      basedOnPreviousValue: false
                 - name: CircuitBreaker
                   args:
                     name: distributorCircuitBreaker
@@ -38,7 +51,7 @@ resilience4j:
   timelimiter:
     instances:
       distributorCircuitBreaker:
-        timeoutDuration: 3s
+        timeoutDuration: 5s
         cancelRunningFuture: true
 
   circuitbreaker:
