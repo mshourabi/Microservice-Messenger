@@ -4,5 +4,5 @@ spring:
 
 
 subsystem:
-  telegram-sender:
-    name: telegram-sender
+  telegram-agent:
+    name: telegram-agent

@@ -3,6 +3,6 @@
 ##    name: client
 ##
 ##
-#telegram-sender:
+#telegram-agent:
 #  service:
 #    name: localhost:8072

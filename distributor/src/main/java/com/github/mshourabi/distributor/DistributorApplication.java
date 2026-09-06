@@ -1,6 +1,6 @@
 package com.github.mshourabi.distributor;
 
-import com.github.mshourabi.client.telegramsender.fiegn.TelegramSenderClient;
+import com.github.mshourabi.client.tekegramagent.fiegn.TelegramAgentClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -11,7 +11,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
                 "com.github.mshourabi.client"
         }
 )
-@EnableFeignClients(clients = TelegramSenderClient.class)
+@EnableFeignClients(clients = TelegramAgentClient.class)
 public class DistributorApplication {
 
     public static void main(String[] args) {

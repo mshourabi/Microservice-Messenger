@@ -32,7 +32,7 @@ spring:
 resilience4j:
   circuitbreaker:
     instances:
-      telegramSender:    #  ${telegram-sender.service.name}
+      telegramAgent:    #  ${telegram-agent.service.name}
         slidingWindowType: COUNT_BASED
         slidingWindowSize: 50
         minimumNumberOfCalls: 5
@@ -67,7 +67,7 @@ logging:
     liquibase: DEBUG
     org.springframework.boot.autoconfigure.liquibase: DEBUG
 
-telegram-sender:
+telegram-Agent:
   service:
-    name: telegramSender
+    name: telegramAgent
     url: http://localhost:8072

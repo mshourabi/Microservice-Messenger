@@ -19,7 +19,7 @@
     <modules>
         <module>client</module>
         <module>distributor</module>
-        <module>telegram-sender</module>
+        <module>telegram-agent</module>
         <module>gateway</module>
     </modules>
 

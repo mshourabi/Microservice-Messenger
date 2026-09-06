@@ -27,7 +27,7 @@ spring:
 resilience4j:
   circuitbreaker:
     instances:
-      telegramSender: #  ${telegram-sender.service.name}
+      telegramAgent: #  ${telegram-agent.service.name}
         slidingWindowType: COUNT_BASED
         slidingWindowSize: 50
         minimumNumberOfCalls: 5
@@ -57,7 +57,7 @@ springdoc:
     enabled: true
 
 
-telegram-sender:
+telegram-agent:
   service:
-    name: telegramSender
-    url: http://telegram-sender:8072
+    name: telegramAgent
+    url: http://telegram-agent:8072

@@ -6,6 +6,6 @@ spring:
     name: Distributor
 
 
-telegram-sender:
+telegram-agent:
   service:
-    name: telegram-sender
+    name: telegram-agent
