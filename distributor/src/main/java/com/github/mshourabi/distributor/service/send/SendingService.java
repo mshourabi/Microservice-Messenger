@@ -1,4 +1,4 @@
-package com.github.mshourabi.distributor.service;
+package com.github.mshourabi.distributor.service.send;
 
 
 import com.github.mshourabi.distributor.model.entity.Message;

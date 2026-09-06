@@ -11,3 +11,7 @@ databaseChangeLog:
   - include:
       file: changes/message_sender/001-create-message-sender.yml
       relativeToChangelogFile: true
+
+  - include:
+      file: changes/outbox_event/001-create-outbox-event.yml
+      relativeToChangelogFile: true

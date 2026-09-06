@@ -5,9 +5,9 @@ spring:
   application:
     name: Distributor
   datasource:
-    url: jdbc:postgresql://localhost:5432/distributor
-    username: root
-    password: root
+    url: jdbc:postgresql://localhost:5432/messenger
+    username: postgres
+    password: postgres
 
   liquibase:
     enabled: true

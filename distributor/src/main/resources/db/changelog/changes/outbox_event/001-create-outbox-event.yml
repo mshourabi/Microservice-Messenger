@@ -1,0 +1,58 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 001-create-outbox-event
+      author: majid
+
+      changes:
+
+        - createTable:
+            tableName: tbl_outbox_event
+            columns:
+
+              - column:
+                  name: ID
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_outboxevent_id
+                    nullable: false
+                    notNullConstraintName: nn_outboxevent_id
+
+              - column:
+                  name: outboxId
+                  type: VARCHAR(36)
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: uq_outboxevent_outboxid
+
+              - column:
+                  name: aggregate_type
+                  type: VARCHAR(100)
+
+              - column:
+                  name: aggregate_id
+                  type: VARCHAR(100)
+
+              - column:
+                  name: event_type
+                  type: VARCHAR(100)
+
+              - column:
+                  name: payload
+                  type: JSONB
+
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_message_created
+
+              - column:
+                  name: last_modified_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_sender_lastmodify

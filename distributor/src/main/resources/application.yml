@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: Distributor
+    name: distributor
 
 
 telegram-agent:
