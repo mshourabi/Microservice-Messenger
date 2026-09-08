@@ -23,10 +23,12 @@ public class SendAsyncService implements SendingService {
     @Override
     @Transactional(rollbackFor = Throwable.class)
     public Message sending(Message message) {
-        message = messageRepository.save(message);
+        // todo Get from Spring Security
+        message.setCreatorUsername("USER");
 
+        message = messageRepository.save(message);
         OutboxEvent outbox = OutboxMapper.map(message);
-        outbox.setEventType(EventType.MESSAGE_SEND_AYSNC);
+        outbox.setEventType(EventType.TELEGRAM_AYSNC_MESSAGE);
         outboxRepository.save(outbox);
         return message;
     }

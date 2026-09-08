@@ -5,9 +5,29 @@ spring:
   application:
     name: telegram-agent
 
+  datasource:
+    url: jdbc:postgresql://localhost:5432/messenger
+    username: postgres
+    password: postgres
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate.ddl-auto: validate
+    show-sql: true
+    properties.hibernate.format_sql: true
+
   liquibase:
     enabled: false
 #    change-log: classpath:db/changelog/db.changelog-master.yml
+
+  kafka:
+    bootstrap-servers: localhost:29092
+
+    consumer:
+      group-id: telegram-agent
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 
   cloud:
     openfeign:
@@ -40,3 +60,10 @@ resilience4j:
         limitForPeriod: 10
         limitRefreshPeriod: 2s
         timeoutDuration: 0s
+
+app:
+  kafka:
+    topics:
+      telegram-agent:
+        name: TELEGRAM_AYSNC_MESSAGE
+        group-id: telegram-agent

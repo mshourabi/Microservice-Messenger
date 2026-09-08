@@ -3,29 +3,31 @@ package com.github.mshourabi.distributor.model.entity;
 import com.github.mshourabi.client.entity.BaseEntity;
 import com.github.mshourabi.client.enums.AggregateType;
 import com.github.mshourabi.client.enums.EventType;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+import tools.jackson.databind.JsonNode;
 
 @Table(name = "tbl_outbox_event")
+@Entity
 public class OutboxEvent extends BaseEntity {
 
     @Column(unique = true, length = 36)
     private String outboxId;
 
-    @Column
+    @Column(name = "aggregate_type", length = 100)
     @Enumerated(EnumType.STRING)
     private AggregateType aggregateType;
 
-    @Column
+    @Column(name = "aggregate_id", length = 100)
     private String aggregateId;
 
-    @Column
+    @Column(name = "event_type", length = 100)
     @Enumerated(EnumType.STRING)
     private EventType eventType;
 
-    @Column
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(name = "payload", columnDefinition = "jsonb", nullable = false)
     private String payload;
 
     public OutboxEvent() {

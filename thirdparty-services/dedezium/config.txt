@@ -1,0 +1,38 @@
+// Send this post request to Debezium for config
+
+ curl 'localhost:8083/connectors' \
+ --header 'Content-Type: application/json' \
+ --data '{
+           "name": "messenger-outbox-connector",
+           "config": {
+             "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+
+             "database.hostname": "postgres",
+             "database.port": "5432",
+             "database.user": "postgres",
+             "database.password": "postgres",
+             "database.dbname": "messenger",
+
+             "topic.prefix": "messenger",
+
+             "plugin.name": "pgoutput",
+
+             "table.include.list": "public.tbl_outbox_event",
+
+             "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+             "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+             "value.converter.schemas.enable": "false",
+
+             "transforms": "outbox",
+             "transforms.outbox.type": "io.debezium.transforms.outbox.EventRouter",
+
+             "transforms.outbox.route.by.field": "event_type",
+             "transforms.outbox.route.topic.replacement": "${routedByValue}",
+
+             "transforms.outbox.table.field.event.id": "outbox_id",
+             "transforms.outbox.table.field.event.key": "aggregate_id",
+             "transforms.outbox.table.field.event.payload": "payload",
+
+             "transforms.outbox.table.fields.additional.placement": "event_type:header:type"
+           }
+         }'

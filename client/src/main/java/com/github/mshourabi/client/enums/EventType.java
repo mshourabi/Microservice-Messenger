@@ -2,7 +2,7 @@ package com.github.mshourabi.client.enums;
 
 public enum EventType {
 
-    MESSAGE_SEND_AYSNC,
+    TELEGRAM_AYSNC_MESSAGE,
 //    MESSAGE_SEND_REQUESTED,
 //    MESSAGE_SENT,
 //    MESSAGE_FAILED
