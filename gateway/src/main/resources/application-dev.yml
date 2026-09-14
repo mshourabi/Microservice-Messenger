@@ -6,13 +6,17 @@ server:
   port: 8070
 
 management:
-  endpoint:
-    gateway:
-      access: read_only
+#  endpoint:
+#    gateway:
+#      access: read_only
   endpoints:
     web:
       exposure:
-        include: "*"
+        - health
+        - info
+        - prometheus
+
+#        include: "*"
 #        exclude: "*"
 
 spring:

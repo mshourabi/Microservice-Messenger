@@ -67,3 +67,13 @@ app:
       telegram-agent:
         name: TELEGRAM_AYSNC_MESSAGE
         group-id: telegram-agent
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+          - prometheus

@@ -74,3 +74,13 @@ telegram-Agent:
   service:
     name: telegramAgent
     url: http://localhost:8072
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+          - prometheus
