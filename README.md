@@ -8,31 +8,7 @@ The system allows you to implement and integrate your own agent for a specific m
 
 The project follows a microservice architecture where each message-sending platform can be implemented as an independent agent.
 
-```text
-                         ┌─────────────────┐
-                         │     Client      │
-                         └────────┬────────┘
-                                  │
-                                  ▼
-                         ┌─────────────────┐
-                         │     Gateway     │
-                         │     :8070       │
-                         └────────┬────────┘
-                                  │
-                                  ▼
-                    ┌─────────────────────────┐
-                    │       Distributor       │
-                    │          :8071          │
-                    └────────────┬────────────┘
-                                 │
-                    ┌────────────┴────────────┐
-                    │                         │
-                    ▼                         ▼
-          ┌──────────────────┐      ┌──────────────────┐
-          │ Telegram Agent   │      │   SMS Agent      │
-          │      :8072       │      │      ...         │
-          └──────────────────┘      └──────────────────┘
-```
+![Messenger Architecture](docs/Messanger-architecture.png)
 
 ## Modules
 
