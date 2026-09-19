@@ -3,7 +3,8 @@ server:
 
 spring:
   application:
-    name: Distributor
+    name: distributor
+
   datasource:
     url: jdbc:postgresql://localhost:5432/messenger
     username: postgres
@@ -84,3 +85,13 @@ management:
           - health
           - info
           - prometheus
+
+  tracing:
+    sampling:
+      probability: 1.0
+
+  opentelemetry:
+    tracing:
+      export:
+        otlp:
+          endpoint: http://localhost:4318/v1/traces
