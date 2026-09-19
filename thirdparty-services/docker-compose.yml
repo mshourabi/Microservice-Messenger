@@ -246,6 +246,7 @@ services:
   # =========================
   # Prometheus
   # =========================
+
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
@@ -260,3 +261,20 @@ services:
 #      - gateway
 #      - distributor
 #      - telegram-sender
+
+  # =========================
+  # Tempo
+  # =========================
+
+  tempo:
+    image: grafana/tempo:latest
+    container_name: tempo
+    restart: unless-stopped
+    ports:
+      - "3200:3200"
+      - "4317:4317"
+      - "4318:4318"
+    volumes:
+      - ./observability/tempo/tempo.yml:/etc/tempo.yml:ro
+    command:
+      - "-config.file=/etc/tempo.yml"
